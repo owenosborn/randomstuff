@@ -1,0 +1,48 @@
+ <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <script src="https://critterandguitari.github.io/Organelle_Manual/assets/jquery.toc.js"></script>
+  <script>
+  
+  function getUrlParameter(name) {
+    name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
+    var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
+    var results = regex.exec(location.search);
+    return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
+  };
+    
+    $( document ).ready(function() {
+     		manual = getUrlParameter('m')
+      //  $.get( "https://raw.githubusercontent.com/critterandguitari/Organelle_Manual/master/manual.md", function( data ) {
+        $.get( "https://critterandguitari.github.io/"+manual+"/manual.md", function( data ) {
+              $( "#manual-md" ).empty();
+              $( "#manual-md" ).html( marked(data) );
+              $("#toc").toc({content: "#manual-md", headings: "h1,h2"});
+          	  $("#manual-md").find('img').each(function() {  
+   					      imgsrc = this.src;
+                	this.src = imgsrc.replace("https://www.critterandguitari.com/", "https://critterandguitari.github.io/"+manual+"/");
+  			       // console.log(imgsrc);
+              });  
+              $("#manual-md").prepend('<a target="_blank" href="https://www.critterandguitari.com/print-manual?m='+manual+'">Print Friendly Manual</a>');
+              // jump to anchor if present
+        			if (location.hash) {
+                  setTimeout(function() {$(document).scrollTop( $(location.hash).offset().top - 64);}, 1000);
+        			}
+        });
+    });
+    $(window).scroll(function() { 
+     	//console.log($(window).scrollTop()); 
+      var tocScroll = $(window).scrollTop();
+      if (tocScroll < 120) {
+      	$("#toc-block").css({ top: 120 - tocScroll + "px" });
+      }
+      else {
+        $("#toc-block").css({ top: "0px" });
+      }
+    });
+    
+  </script>
+  
+  <style>
+  #toc, #toc ul {
+  	list-style-type: none;
+  }
+  </style>
