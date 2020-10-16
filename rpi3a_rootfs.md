@@ -91,7 +91,7 @@ in /etc/systemd/system.conf add:
     
 boot stuff.  cmdline.txt should look similar to this:
 
-    dwc_otg.lpm_enable=0 root=PARTUUID=9d5fbf22-02 console=tty3 rootfstype=ext4 elevator=deadline fsck.mode=skip rootwait noswap fastboot loglevel=0 logo.nologo vt.global_cursor_default=0
+    dwc_otg.lpm_enable=0 root=PARTUUID=9d5fbf22-02 console=tty1 rootfstype=ext4 elevator=deadline fsck.mode=skip rootwait noswap fastboot 
 
 for faster booting
 
