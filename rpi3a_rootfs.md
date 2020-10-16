@@ -26,6 +26,22 @@ change keyboard:
 
 change gb to us, reboot
 
+change pi username to music. first make root password
+
+    sudo passwd root
+
+use 'music'.  then logout and login as root (have to disable autologin first).  change name
+
+    usermod -l music pi
+
+change home dir
+
+    usermod -m -d /home/music music
+
+change group name
+
+    groupmod --new-name music pi
+
 # config.txt
 
 comment:
@@ -73,7 +89,7 @@ in /etc/systemd/system.conf add:
     DefaultTimeoutStartSec=10s
     DefaultTimeoutStopSec=5s
     
-boot stuff.  cmdline.txt should look like this:
+boot stuff.  cmdline.txt should look similar to this:
 
     dwc_otg.lpm_enable=0 root=PARTUUID=9d5fbf22-02 console=tty3 rootfstype=ext4 elevator=deadline fsck.mode=skip rootwait noswap fastboot loglevel=0 logo.nologo vt.global_cursor_default=0
 
