@@ -16,6 +16,10 @@ then boot and run raspi-config
 * enable ssh
 * enable VNC (this will download software)
 
+disable default vnc service
+
+    sudo systemctl disable vncserver-x11-serviced
+
 install vim
 
     sudo apt-get update 
