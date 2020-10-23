@@ -14,6 +14,7 @@ then boot and run raspi-config
 * enter wifi ssid 
 * under interfacing disable serial console, enable port 
 * enable ssh
+* enable VNC (this will download software)
 
 install vim
 
